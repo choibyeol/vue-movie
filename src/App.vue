@@ -1,18 +1,28 @@
 <template>
-  <Hello />
+  <div>
+    <Header />
+    <div v-if="isLoading">
+      <Loading />
+    </div>
+    <MovieContainer />
+  </div>
 </template>
 
 <script>
-import Hello from "~/components/Hello";
+import Header from "~/components/Header";
+import Loading from "~/components/Loading";
+import MovieContainer from "~/components/MovieContainer";
 
 export default {
   components: {
-    Hello,
+    Header,
+    Loading,
+    MovieContainer,
   },
-  data() {
-    return {
-      msg: "Hello Vue!",
-    };
+  computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
   },
 };
 </script>

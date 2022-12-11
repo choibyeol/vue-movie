@@ -1,7 +1,7 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const HtmlPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   resolve: {
@@ -39,15 +39,7 @@ module.exports = {
       template: "./src/index.html",
       // path.resolve 사용해야 하는데 내장되어 있어서 생략 가능
     }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: "static",
-          // to: 'dist'
-          // // 기본적으로 output 경로를 참고. 따라서 따로 지정하지 않아도 dist
-        },
-      ],
-    }),
+    new Dotenv({ systemvars: true }),
   ],
   // devServer: {
   //   port: 8080, // 기본으로 8080으로 설정되어 있음.

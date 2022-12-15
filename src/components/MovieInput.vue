@@ -3,7 +3,8 @@
     <input
       class="movie__search--input"
       v-model="inputText"
-      placeholder="찾고 싶은 영화를 검색하세요." />
+      placeholder="찾고 싶은 영화를 검색하세요."
+      @keyup.enter="searchMovie(inputText)" />
     <button
       class="movie__search--button"
       @click="searchMovie(inputText)">
@@ -30,8 +31,12 @@ export default {
     width: 450px;
     height: 20px;
     margin-right: 10px;
+    border: 0;
     border-radius: 3px;
     padding: 3px 10px 3px 10px;
+    &:focus {
+      outline: none;
+    }
   }
   &--button {
     background-color: white;

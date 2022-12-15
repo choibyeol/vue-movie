@@ -30,6 +30,17 @@ export default {
     width: 450px;
     height: 20px;
     margin-right: 10px;
+    border-radius: 3px;
+    padding: 3px 10px 3px 10px;
+  }
+  &--button {
+    background-color: white;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgrey;
+    }
   }
 }
 </style>

@@ -37,6 +37,7 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 0;
+  margin-top: 30px;
 }
 
 .movie__container {
@@ -46,7 +47,7 @@ export default {
 }
 
 .movie {
-  margin: 20px 20px 45px 20px;
+  margin: 20px 20px 65px 20px;
   width: 200px;
   height: 300px;
   &--poster {

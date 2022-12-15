@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Background />
     <Header />
     <div v-if="isLoading">
       <Loading />
@@ -9,12 +10,14 @@
 </template>
 
 <script>
+import Background from "~/components/Background";
 import Header from "~/components/Header";
 import Loading from "~/components/Loading";
 import MovieContainer from "~/components/MovieContainer";
 
 export default {
   components: {
+    Background,
     Header,
     Loading,
     MovieContainer,

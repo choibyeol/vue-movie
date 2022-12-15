@@ -4,6 +4,7 @@
 
 <style scoped>
 .header_title {
+  color: white;
   text-align: center;
 }
 </style>

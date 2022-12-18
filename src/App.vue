@@ -27,3 +27,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.scroll__hidden {
+  overflow: hidden;
+  height: 100%;
+}
+</style>

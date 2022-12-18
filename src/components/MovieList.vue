@@ -51,6 +51,7 @@ export default {
   watch: {
     isDetail() {
       if (!this.modalClosed) {
+        document.querySelector("body").classList.add("scroll__hidden");
         window.addEventListener("keyup", this.keyUpHandler);
       }
     },
@@ -65,6 +66,7 @@ export default {
         if (event.key === "Escape") {
           this.modalClosed = true;
           this.closeModal();
+          document.querySelector("body").classList.remove("scroll__hidden");
         }
       }
     },

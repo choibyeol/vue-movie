@@ -5,7 +5,8 @@
     <li
       v-for="movie in movieList"
       :key="movie.imdbID"
-      class="movie__container">
+      class="movie__container"
+      @click="searchDetail(movie.imdbID)">
       <div class="movie">
         <img
           class="movie--poster"
@@ -18,13 +19,57 @@
       </div>
     </li>
   </ul>
+  <ModalView
+    v-if="isDetail"
+    @close-modal="closeModal">
+    <MovieDetail />
+  </ModalView>
 </template>
 
 <script>
+import ModalView from "~/components/ModalView";
+import MovieDetail from "~/components/MovieDetail";
+
 export default {
+  components: {
+    ModalView,
+    MovieDetail,
+  },
+  data() {
+    return {
+      modalClosed: false,
+    };
+  },
   computed: {
+    isDetail() {
+      return this.$store.state.isDetail;
+    },
     movieList() {
       return this.$store.state.movieList;
+    },
+  },
+  watch: {
+    isDetail() {
+      if (!this.modalClosed) {
+        window.addEventListener("keyup", this.keyUpHandler);
+      }
+    },
+  },
+  methods: {
+    async searchDetail(imdbID) {
+      this.modalClosed = false;
+      await this.$store.dispatch("fetchDetail", imdbID);
+    },
+    keyUpHandler(event) {
+      if (!this.modalClosed) {
+        if (event.key === "Escape") {
+          this.modalClosed = true;
+          this.closeModal();
+        }
+      }
+    },
+    closeModal() {
+      this.$store.commit("changeIsDetail");
     },
   },
 };
@@ -41,20 +86,27 @@ export default {
 }
 
 .movie__container {
-  background-color: white;
   list-style-type: none;
   cursor: pointer;
+  &:hover {
+    opacity: 0.85;
+  }
 }
 
 .movie {
   margin: 20px 20px 65px 20px;
   width: 200px;
   height: 300px;
+  background-color: white;
+  border-radius: 3px;
+  padding: 10px;
   &--poster {
     width: 100%;
     height: 100%;
   }
   &--text {
+    margin: 0px -10px 0px -10px;
+    padding: 0px 0px 3px 10px;
     background-color: white;
   }
   &--title {

@@ -2,9 +2,7 @@
   <div>
     <Background />
     <Header />
-    <div v-if="isLoading">
-      <Loading />
-    </div>
+    <Loading v-if="isLoading" />
     <MovieContainer />
   </div>
 </template>

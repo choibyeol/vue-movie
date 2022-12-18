@@ -1,8 +1,6 @@
 <template>
-  <div class="movie__container">
-    <MovieInput />
-    <MovieList />
-  </div>
+  <MovieInput />
+  <MovieList />
 </template>
 
 <script>

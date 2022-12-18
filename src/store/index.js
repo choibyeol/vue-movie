@@ -5,6 +5,7 @@ export default createStore({
   state() {
     return {
       isLoading: false,
+      isDetail: false,
       movieList: [],
       movieDetail: {},
       page: 1,
@@ -13,25 +14,37 @@ export default createStore({
   mutations: {
     setMovieList(state, payload) {
       state.movieList = payload.Search;
-      console.log(state.movieList);
+    },
+    setMovieDetail(state, payload) {
+      state.movieDetail = payload;
     },
     changeLoading(state) {
       state.isLoading = !state.isLoading;
     },
+    changeIsDetail(state) {
+      state.isDetail = !state.isDetail;
+    },
   },
   actions: {
     fetchList: async ({ commit, state }, payload) => {
-      // payload에는 검색한 movie 값 들어옴
+      // payload: 검색한 movie
+      commit("changeLoading");
       const page = state.page;
       const movie = payload;
-      commit("changeLoading");
       const url = `&s=${movie}&page=${page}`;
       const res = await request(url);
       commit("setMovieList", res);
       commit("changeLoading");
     },
-    // fetchDetail: async () => {
-    //   // &i=tt4520988&plot=full
-    // },
+    fetchDetail: async ({ commit, state }, payload) => {
+      // payload: 영화 id
+      commit("changeLoading");
+      const id = payload;
+      const url = `&i=${id}&plot=full`;
+      const res = await request(url);
+      commit("setMovieDetail", res);
+      commit("changeLoading");
+      commit("changeIsDetail");
+    },
   },
 });
